@@ -227,6 +227,13 @@ class User:
       response.append({'id':tm['id'],'name':tm['name']})
     return response
 
+  def listNetworks(self):
+    response=[]
+    rs = self.mycs.listNetworks()
+    for tm in rs['network']:
+      response.append({'id':tm['id'],'name':tm['name']})
+    return response
+
   def listNet(self):
     response=[]
     rs = self.mycs.listNetworks()

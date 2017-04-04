@@ -59,6 +59,7 @@ def newvm():
         temp = request.form['template']
         zone = request.form['zone']
         name = request.form['vmname']
+        net = request.form['net']
         start_date = request.form['start_date']
         end_date = request.form['end_date']
         duration = request.form['duration']
@@ -66,7 +67,7 @@ def newvm():
         end_time = datetime.datetime.strptime(end_date, '%Y-%m-%dT%H:%M')
         duration_time = datetime.timedelta(minutes = int(duration))
 
-        res = s.schedulevm(u, zone, temp, serv, name, start_time, end_time, duration_time)
+        res = s.schedulevm(u, zone, temp, serv, net, name, start_time, end_time, duration_time)
         if res == 0:
             flash("Failed to find slot to schedule VM")
         return redirect(url_for('index'))
@@ -75,8 +76,9 @@ def newvm():
         serv = u.listServOff()
         temp = u.listTempl()
         zon = u.listZones()
+        net = u.listNetworks()
 
-        return render_template('newvm.html', serv=serv, temp=temp, zon=zon, now=datetime.datetime.now().strftime("%Y-%m-%dT%H:%M"))
+        return render_template('newvm.html', serv=serv, temp=temp, zon=zon, net=net, now=datetime.datetime.now().strftime("%Y-%m-%dT%H:%M"))
   else:
     return redirect(url_for('login'))
 

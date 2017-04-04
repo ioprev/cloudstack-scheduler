@@ -26,6 +26,14 @@
           {% endfor %}
       </select>
     </div>
+    <div class=net>
+      Network offering:
+      <select name = 'net'>
+          {% for network in net %}
+            <option value="{{ network['id'] }}">{{ network['name'] }}</option>
+          {% endfor %}
+      </select>
+    </div>
     <div class=name>
       VM name: <input type=text name=vmname>
     </div>
